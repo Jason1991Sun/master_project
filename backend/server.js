@@ -44,6 +44,12 @@ app.get("/api/items", (req, res) => {
   res.send(data.items);
 });
 
+const catsRouter = require('./routes/cats');
+const merchandisesRouter = require('./routes/merchandises');
+
+app.use('/cats', catsRouter);
+app.use('/merchandises', merchandisesRouter);
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
