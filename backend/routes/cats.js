@@ -6,7 +6,7 @@ let Cat = require('../models/cat.model');
 router.route('/').get((req, res) => {
     Cat.find()
         .then(cats => res.json(cats))
-        .catch(err => res.status(400).json('Error: ' + err));
+        .catch(err => res.status(400).json('Database Get Cat Error: ' + err));
 });
 
 // adding a new cat to database
@@ -17,7 +17,7 @@ router.route('/add').post((req, res) => {
     const newCat = new Cat({cat_Name});
     newCat.save()
         .then(() => res.json('new cat added!'))
-        .catch(err => res.status(400).json('Error: ' + err));
+        .catch(err => res.status(400).json('Database Add Cat Error: ' + err));
 });
 
 module.exports = router;

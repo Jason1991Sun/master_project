@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 // example to create a model/Schema for cat
 const merchandiseSchema = new Schema({
-    item_ID: {type: String, required: true},
+    Item_ID: {type: String, required: true},
     Item_Name: {type: String, required: true},
     Item_Code: {type: String, required: true},
     Item_Category: {type: String, required: true},
@@ -14,11 +14,11 @@ const merchandiseSchema = new Schema({
     Fabric_Content: {type: String, required: true},
     Description: {type: String, required: true},
     Special_Offer: {type: String, required: true},
-    item_img: {type: String, required: true}
+    Item_img: {type: String, required: true}
 }, {
     timestamps: true
 });
 
-const Cat = mongoose.model('Cat', catSchema);
+const Merchandise = mongoose.model('Merchandise', merchandiseSchema);
 
-module.exports = Cat;
+module.exports = Merchandise;
