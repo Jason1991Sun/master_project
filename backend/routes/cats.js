@@ -20,4 +20,18 @@ router.route('/add').post((req, res) => {
         .catch(err => res.status(400).json('Database Add Cat Error: ' + err));
 });
 
+// fetch a specific cat by the document ID
+router.route('/:id').get((req,res) => {
+    Cat.findById(req.params.id)
+        .then(cat => res.json(cat))
+        .catch(err => res.status(400).json('Database getting specific cat error: ' + err));
+});
+
+// delete a specific cat by the document ID
+router.route('/:id').delete((req, res) => {
+    Cat.findByIdAndDelete(req.params.id)
+        .then(() => res.json('cat ' + req.params.id + ' has been removed'))
+        .catch(err => res.status(400).json('Database remove specific cat error: ' + err));
+});
+
 module.exports = router;
