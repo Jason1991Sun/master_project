@@ -75,7 +75,9 @@ router.route('/update/:id').post((req, res) => {
 
 // delete a specific merchandise by document ID
 router.route('/:id').delete((req, res) => {
-    
+    Merchandise.findByIdAndDelete(req.params.id)
+        .then(() => res.json('Merchandise ' + req.params.id + ' deleted'))
+        .catch(err => res.status(400).json('Merchandise deletion err: ' + err));
 });
 
 module.exports = router;
