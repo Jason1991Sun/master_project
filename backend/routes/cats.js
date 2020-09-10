@@ -34,4 +34,16 @@ router.route('/:id').delete((req, res) => {
         .catch(err => res.status(400).json('Database remove specific cat error: ' + err));
 });
 
+// update a specific cat by the document ID
+router.route('/update/:id').post((req, res) => {
+    Cat.findById(req.params.id)
+        .then(cat => {
+            cat.cat_Name = req.body.cat_Name;
+            cat.save()
+                .then(() => res.json('Cat updated!'))
+                .catch(err => res.status(400).json('Cat update Error: ' + err));
+        })
+        .catch(err => res.status(400).json('Database getting specific cat error: ' + err));
+});
+
 module.exports = router;

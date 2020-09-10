@@ -1,6 +1,6 @@
 import express from "express";
 import data from "./data";
-import cat from "./cat";
+import cat from "./category";
 
 // importing the middleware cors, https://www.npmjs.com/package/cors
 const cors = require('cors');
