@@ -13,7 +13,7 @@ const merchandiseSchema = new Schema({
     Item_Price: {type: Number, required: true},
     Fabric_Content: {type: String, required: true},
     Description: {type: String, required: true},
-    Special_Offer: {type: String, required: true},
+    Special_Offer: {type: String},
     Item_img: {type: String, required: true}
 }, {
     timestamps: true

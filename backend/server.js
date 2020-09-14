@@ -46,9 +46,11 @@ app.get("/api/items", (req, res) => {
 
 const catsRouter = require('./routes/cats');
 const merchandisesRouter = require('./routes/merchandises');
+const usersRouter = require('./routes/users');
 
 app.use('/cats', catsRouter);
 app.use('/merchandises', merchandisesRouter);
+app.use('/users', usersRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
