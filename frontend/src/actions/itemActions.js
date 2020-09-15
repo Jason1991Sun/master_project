@@ -18,10 +18,10 @@ export const listItems = () => async (dispatch) => {
   }
 };
 
-export const detailsItem = (item_id) => async (dispatch) => {
+export const detailsItem = (Item_ID) => async (dispatch) => {
   try {
-    dispatch({ type: ITEM_DETAILS_REQUEST, payload: item_id });
-    const { data } = await axios.get("/api/items/" + item_id);
+    dispatch({ type: ITEM_DETAILS_REQUEST, payload: Item_ID });
+    const { data } = await axios.get("/api/items/" + Item_ID);
     dispatch({ type: ITEM_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: ITEM_DETAILS_FAIL, payload: error.message });
