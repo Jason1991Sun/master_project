@@ -7,14 +7,16 @@ let OrderHistory = require('../models/orderHistory.model');
 // getting the existing users in the database
 router.route('/').get((req, res) => {
     if(req.body.username != null){
-        User.findOne({username: req.body.username})
-            .next(user => res.json(user))
-            .catch(err => res.status(400).json('get specific user by username err: ' + err))
+        User.findOne({username: req.body.username}, function(err, user){
+            if(err) res.status(400).json('get specific user by username err: ' + err);
+            else res.json(user);
+        });
     }
     else if(req.body.email != null){
-        User.findOne({email: req.body.email})
-            .next(user => res.json(user))
-            .catch(err => res.status(400).json('get specific user by email err: ' + err))
+        User.findOne({email: req.body.email}, function(err, user){
+            if(err) res.status(400).json('get specific user by email err: ' + err);
+            else res.json(user);
+        });
     }
     else{
         User.find()
@@ -76,7 +78,6 @@ router.route('/:id').get((req, res) => {
         .then(user => res.json(user))
         .catch(err => res.status(400).json('getting user by id err:' + err));
 });
-
 
 //TODO: update a specific user
 
