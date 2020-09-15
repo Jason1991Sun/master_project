@@ -90,7 +90,7 @@ function Item(props) {
                   "/1.jpg"
                 }
               ></ItemImg1>
-
+              <ItemImg2
                 src={
                   process.env.PUBLIC_URL +
                   "/images/product_images/" +
