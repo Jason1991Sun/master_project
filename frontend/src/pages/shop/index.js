@@ -63,7 +63,7 @@ function Shop(props) {
         <ItemWrapper>
           {items.map((item) => (
             <Item key={item.Item_Code}>
-              <Link to={"/items/" + item.item_ID}>
+              <Link to={"/items/" + item.Item_ID}>
                 <ItemImg
                   src={
                     process.env.PUBLIC_URL +
