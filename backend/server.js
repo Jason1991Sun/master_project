@@ -17,6 +17,8 @@ app.use(express.json());
 
 // getting the mongoDB connection string
 const uri = process.env.ATLAS_URI;
+mongoose.set('useFindAndModify', false);
+
 // Connect to MongoDB Atlas
 mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
     .catch(err => console.log(err));

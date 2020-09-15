@@ -18,6 +18,7 @@ router.route('/').get((req, res) => {
             else res.json(user);
         });
     }
+    //todo: will modify this else in the future since we don't want user to see all customer records
     else{
         User.find()
         .then(users => res.json(users))
@@ -72,15 +73,25 @@ router.route('/add').post((req, res) => {
         .catch(err => res.status(400).json('Add new shopping cart error: ' + err));
 });
 
-//TODO: fetch a specific user
+// fetch a specific user by id
 router.route('/:id').get((req, res) => {
     User.findById(req.params.id)
         .then(user => res.json(user))
         .catch(err => res.status(400).json('getting user by id err:' + err));
 });
 
-//TODO: update a specific user
-
+// update a specific user using post request body
+router.route('/update/').post((req, res) => {
+    // copy the request body to a temporary storage
+    let temp = {...req.body};
+    // get all the fields that needed to be updated
+    delete temp['username'];
+    console.log(temp);
+    User.findOneAndUpdate({username: req.body.username}, {$set: temp}, {new: true}, function(err, user) {
+        if(err) res.status(400).json('update user err: ' + err);
+        res.json('user updated: ' + user);
+    });
+});
 //TODO: delete a specific user
 
 module.exports = router;
