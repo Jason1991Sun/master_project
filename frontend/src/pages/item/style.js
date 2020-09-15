@@ -23,7 +23,9 @@ export const DescrHeading = styled.h2`
   font-size: 20px;
 `;
 
-export const ItemDescription = styled.div``;
+export const ItemDescription = styled.div`
+  margin-bottom: 30px;
+`;
 
 export const ItemWrapper = styled.div`
   display: flex;

@@ -91,6 +91,45 @@ function Item(props) {
                 }
               ></ItemImg1>
 
+                src={
+                  process.env.PUBLIC_URL +
+                  "/images/product_images/" +
+                  item.Item_Category +
+                  "/" +
+                  item.Item_Code +
+                  "/2.jpg"
+                }
+              ></ItemImg2>
+              <ItemImg3
+                src={
+                  process.env.PUBLIC_URL +
+                  "/images/product_images/" +
+                  item.Item_Category +
+                  "/" +
+                  item.Item_Code +
+                  "/3.jpg"
+                }
+              ></ItemImg3>
+              <ItemImg4
+                src={
+                  process.env.PUBLIC_URL +
+                  "/images/product_images/" +
+                  item.Item_Category +
+                  "/" +
+                  item.Item_Code +
+                  "/4.jpg"
+                }
+              ></ItemImg4>
+              <ItemImg5
+                src={
+                  process.env.PUBLIC_URL +
+                  "/images/product_images/" +
+                  item.Item_Category +
+                  "/" +
+                  item.Item_Code +
+                  "/5.jpg"
+                }
+              ></ItemImg5>
               <ItemImg6
                 src={
                   process.env.PUBLIC_URL +
@@ -105,9 +144,7 @@ function Item(props) {
           </ItemImgWrapper>
           <ItemDetails>
             <ItemName>{item.short_name}</ItemName>
-            <ItemPrice>
-              $ {item.Item_Price} - $ {item.Item_Price * 2}
-            </ItemPrice>
+            <ItemPrice>$ {item.Item_Price}</ItemPrice>
 
             <QuantityWrapper></QuantityWrapper>
             <Cart></Cart>
