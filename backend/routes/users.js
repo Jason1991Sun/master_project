@@ -6,19 +6,21 @@ let OrderHistory = require('../models/orderHistory.model');
 
 // getting the existing users in the database
 router.route('/').get((req, res) => {
+    // get a specific user by username
     if(req.body.username != null){
         User.findOne({username: req.body.username}, function(err, user){
             if(err) res.status(400).json('get specific user by username err: ' + err);
             else res.json(user);
         });
     }
+    // get a specific user by email
     else if(req.body.email != null){
         User.findOne({email: req.body.email}, function(err, user){
             if(err) res.status(400).json('get specific user by email err: ' + err);
             else res.json(user);
         });
     }
-    //todo: will modify this else in the future since we don't want user to see all customer records
+    //todo: will modify this 'else' statement in the future since we don't want user to see all customer records
     else{
         User.find()
         .then(users => res.json(users))
@@ -84,14 +86,20 @@ router.route('/:id').get((req, res) => {
 router.route('/update/').post((req, res) => {
     // copy the request body to a temporary storage
     let temp = {...req.body};
-    // get all the fields that needed to be updated
+    // get all the fields that needed to be updated (all the fields other than the username)
     delete temp['username'];
-    console.log(temp);
     User.findOneAndUpdate({username: req.body.username}, {$set: temp}, {new: true}, function(err, user) {
         if(err) res.status(400).json('update user err: ' + err);
         res.json('user updated: ' + user);
     });
 });
-//TODO: delete a specific user
+
+//delete a specific user using delete request body
+router.route('/').delete((req, res) => {
+    User.findOneAndDelete({username: req.body.username}, function(err, user) {
+        if(err) res.status(400).json('delete user error: ' + err);
+        res.json('user ' + req.body.username + ' deleted');
+    });
+});
 
 module.exports = router;
