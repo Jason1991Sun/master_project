@@ -48,7 +48,7 @@ function Content(props) {
                     "/1.jpg"
                   }
                 ></ItemImg>
-                <ItemName>{item.Item_Name}</ItemName>
+                <ItemName>{item.short_name}</ItemName>
                 <ItemPrice>${item.Item_Price}</ItemPrice>
               </Link>
             </Item>
@@ -69,7 +69,7 @@ function Content(props) {
                     "/1.jpg"
                   }
                 ></ItemImg>
-                <ItemName>{item.Item_Name}</ItemName>
+                <ItemName>{item.short_name}</ItemName>
                 <ItemPrice>${item.Item_Price}</ItemPrice>
               </Link>
             </Item>

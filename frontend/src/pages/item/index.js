@@ -73,7 +73,7 @@ function Item(props) {
               <Link color="inherit" href="/getting-started/installation/">
                 {item.Item_Category}
               </Link>
-              <Typography color="textPrimary">{item.Item_Name}</Typography>
+              <Typography color="textPrimary">{item.short_name}</Typography>
             </Breadcrumbs>
           </div>
         </NavWrapper>
@@ -90,46 +90,7 @@ function Item(props) {
                   "/1.jpg"
                 }
               ></ItemImg1>
-              <ItemImg2
-                src={
-                  process.env.PUBLIC_URL +
-                  "/images/product_images/" +
-                  item.Item_Category +
-                  "/" +
-                  item.Item_Code +
-                  "/2.jpg"
-                }
-              ></ItemImg2>
-              <ItemImg3
-                src={
-                  process.env.PUBLIC_URL +
-                  "/images/product_images/" +
-                  item.Item_Category +
-                  "/" +
-                  item.Item_Code +
-                  "/3.jpg"
-                }
-              ></ItemImg3>
-              <ItemImg4
-                src={
-                  process.env.PUBLIC_URL +
-                  "/images/product_images/" +
-                  item.Item_Category +
-                  "/" +
-                  item.Item_Code +
-                  "/4.jpg"
-                }
-              ></ItemImg4>
-              <ItemImg5
-                src={
-                  process.env.PUBLIC_URL +
-                  "/images/product_images/" +
-                  item.Item_Category +
-                  "/" +
-                  item.Item_Code +
-                  "/5.jpg"
-                }
-              ></ItemImg5>
+
               <ItemImg6
                 src={
                   process.env.PUBLIC_URL +
@@ -143,7 +104,7 @@ function Item(props) {
             </SmallImg>
           </ItemImgWrapper>
           <ItemDetails>
-            <ItemName>{item.Item_Name}</ItemName>
+            <ItemName>{item.short_name}</ItemName>
             <ItemPrice>
               $ {item.Item_Price} - $ {item.Item_Price * 2}
             </ItemPrice>
