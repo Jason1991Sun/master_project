@@ -6,9 +6,21 @@ let OrderHistory = require('../models/orderHistory.model');
 
 // getting the existing users in the database
 router.route('/').get((req, res) => {
-    User.find()
+    if(req.body.username != null){
+        User.findOne({username: req.body.username})
+            .next(user => res.json(user))
+            .catch(err => res.status(400).json('get specific user by username err: ' + err))
+    }
+    else if(req.body.email != null){
+        User.findOne({email: req.body.email})
+            .next(user => res.json(user))
+            .catch(err => res.status(400).json('get specific user by email err: ' + err))
+    }
+    else{
+        User.find()
         .then(users => res.json(users))
         .catch(err => res.status(400).json('Database Get users Error: ' + err));
+    }
 });
 
 // adding new user
@@ -59,6 +71,12 @@ router.route('/add').post((req, res) => {
 });
 
 //TODO: fetch a specific user
+router.route('/:id').get((req, res) => {
+    User.findById(req.params.id)
+        .then(user => res.json(user))
+        .catch(err => res.status(400).json('getting user by id err:' + err));
+});
+
 
 //TODO: update a specific user
 
