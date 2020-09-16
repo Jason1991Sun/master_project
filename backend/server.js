@@ -1,5 +1,4 @@
 import express from "express";
-import data from "./data";
 import cat from "./category";
 
 // importing the middleware cors, https://www.npmjs.com/package/cors
@@ -17,7 +16,7 @@ app.use(express.json());
 
 // getting the mongoDB connection string
 const uri = process.env.ATLAS_URI;
-mongoose.set('useFindAndModify', false);
+mongoose.set("useFindAndModify", false);
 
 // Connect to MongoDB Atlas
 mongoose
@@ -40,24 +39,13 @@ app.get("/api/categories", (req, res) => {
   res.send(cat.categories);
 });
 
-app.get("/api/items/:id", (req, res) => {
-  const itemID = req.params.id;
-  const product = data.items.find((x) => x.Item_ID === itemID);
-  if (product) res.send(product);
-  else res.status(404).send({ msg: "Product Not Found." });
-});
+const catsRouter = require("./routes/cats");
+const merchandisesRouter = require("./routes/merchandises");
+const usersRouter = require("./routes/users");
 
-app.get("/api/items", (req, res) => {
-  res.send(data.items);
-});
-
-const catsRouter = require('./routes/cats');
-const merchandisesRouter = require('./routes/merchandises');
-const usersRouter = require('./routes/users');
-
-app.use('/cats', catsRouter);
-app.use('/merchandises', merchandisesRouter);
-app.use('/users', usersRouter);
+app.use("/cats", catsRouter);
+app.use("/merchandises", merchandisesRouter);
+app.use("/users", usersRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
