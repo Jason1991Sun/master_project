@@ -3,9 +3,9 @@ import data from "./data";
 import cat from "./category";
 
 // importing the middleware cors, https://www.npmjs.com/package/cors
-const cors = require('cors');
-require('dotenv').config();
-const mongoose = require('mongoose');
+const cors = require("cors");
+require("dotenv").config();
+const mongoose = require("mongoose");
 
 // Declare the express app the port
 const app = express();
@@ -20,11 +20,16 @@ const uri = process.env.ATLAS_URI;
 mongoose.set('useFindAndModify', false);
 
 // Connect to MongoDB Atlas
-mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
-    .catch(err => console.log(err));
+mongoose
+  .connect(uri, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+  })
+  .catch((err) => console.log(err));
 const connection = mongoose.connection;
-connection.once('open', () => {
-  console.log("MongoDB connection established")
+connection.once("open", () => {
+  console.log("MongoDB connection established");
 });
 
 app.get("/", (req, res) => {
@@ -37,7 +42,7 @@ app.get("/api/categories", (req, res) => {
 
 app.get("/api/items/:id", (req, res) => {
   const itemID = req.params.id;
-  const product = data.items.find((x) => x.item_ID === itemID);
+  const product = data.items.find((x) => x.Item_ID === itemID);
   if (product) res.send(product);
   else res.status(404).send({ msg: "Product Not Found." });
 });
@@ -53,6 +58,7 @@ const usersRouter = require('./routes/users');
 app.use('/cats', catsRouter);
 app.use('/merchandises', merchandisesRouter);
 app.use('/users', usersRouter);
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

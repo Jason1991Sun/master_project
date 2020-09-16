@@ -73,7 +73,7 @@ function Item(props) {
               <Link color="inherit" href="/getting-started/installation/">
                 {item.Item_Category}
               </Link>
-              <Typography color="textPrimary">{item.Item_Name}</Typography>
+              <Typography color="textPrimary">{item.short_name}</Typography>
             </Breadcrumbs>
           </div>
         </NavWrapper>
@@ -143,10 +143,8 @@ function Item(props) {
             </SmallImg>
           </ItemImgWrapper>
           <ItemDetails>
-            <ItemName>{item.Item_Name}</ItemName>
-            <ItemPrice>
-              $ {item.Item_Price} - $ {item.Item_Price * 2}
-            </ItemPrice>
+            <ItemName>{item.short_name}</ItemName>
+            <ItemPrice>$ {item.Item_Price}</ItemPrice>
 
             <QuantityWrapper></QuantityWrapper>
             <Cart></Cart>
