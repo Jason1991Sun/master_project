@@ -36,8 +36,8 @@ function Content(props) {
         <HomeHeading>featured items</HomeHeading>
         <ItemWrapper>
           {items.slice(0, 4).map((item) => (
-            <Item key={item.Item_ID}>
-              <Link to={"/items/" + item.Item_ID}>
+            <Item key={item._id}>
+              <Link to={"/items/" + item._id}>
                 <ItemImg
                   src={
                     process.env.PUBLIC_URL +
@@ -57,8 +57,8 @@ function Content(props) {
         <NewArrivalsHeading>new arrivals</NewArrivalsHeading>
         <ItemWrapper>
           {items.slice(0, 4).map((item) => (
-            <Item key={item.Item_Code}>
-              <Link to={"/items/" + item.Item_ID}>
+            <Item key={item._id}>
+              <Link to={"/items/" + item._id}>
                 <ItemImg
                   src={
                     process.env.PUBLIC_URL +

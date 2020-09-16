@@ -22,7 +22,7 @@ function Shop(props) {
 
   useEffect(() => {
     const fetchData = () => {
-      const getItems = axios.get("/api/items");
+      const getItems = axios.get("/merchandises");
       const getCat = axios.get("/api/categories");
 
       axios.all([getItems, getCat]).then(
@@ -62,8 +62,8 @@ function Shop(props) {
         <ItemTitle>Shop All</ItemTitle>
         <ItemWrapper>
           {items.map((item) => (
-            <Item key={item.Item_Code}>
-              <Link to={"/items/" + item.Item_ID}>
+            <Item key={item._id}>
+              <Link to={"/items/" + item._id}>
                 <ItemImg
                   src={
                     process.env.PUBLIC_URL +

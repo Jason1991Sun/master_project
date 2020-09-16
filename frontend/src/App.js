@@ -8,7 +8,7 @@ import About from "./pages/about";
 import Contact from "./pages/contact";
 import Item from "./pages/item";
 // change this later to real login page, for now we are testing signup
-import Login from "./pages/signup"
+import Login from "./pages/signup";
 
 export default function App() {
   return (
