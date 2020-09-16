@@ -27,18 +27,15 @@ const userSchema = new Schema({
     },
     address: {
         type: String,
-        required: true
     },
     additional_address: {
         type: String
     },
     phone_number: {
         type: String,
-        required: true
     },
     profile_picture: {
         type: String,
-        required: true
     },
     shopping_cart: {
         type: Schema.Types.ObjectId,

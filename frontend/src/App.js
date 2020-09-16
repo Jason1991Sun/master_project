@@ -7,6 +7,8 @@ import Shop from "./pages/shop";
 import About from "./pages/about";
 import Contact from "./pages/contact";
 import Item from "./pages/item";
+// change this later to real login page, for now we are testing signup
+import Login from "./pages/signup"
 
 export default function App() {
   return (
@@ -27,8 +29,11 @@ export default function App() {
             path="/items/:id"
             render={({ match }) => <Item match={match} />}
           />
-          <Route path="/">
+          <Route path="/" exact>
             <Home />
+          </Route>
+          <Route path="/login">
+            <Login />
           </Route>
         </Switch>
       </Fragment>

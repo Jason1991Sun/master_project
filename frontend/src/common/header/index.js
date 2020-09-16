@@ -28,6 +28,7 @@ class Header extends Component {
           <UserNav>
             <NavUserItem href="/login">Log in</NavUserItem>
             <NavUserItem href="/cart">Cart</NavUserItem>
+            <NavUserItem href="/signUp">Sign Up</NavUserItem>
           </UserNav>
         </NavWrapper>
       </HeaderWrapper>
