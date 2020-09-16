@@ -45,18 +45,53 @@ export const ItemName = styled.h1`
   font-size: 30px;
   color: #36427a;
   font-weight: bolder;
-  margin: 10px 0;
+  margin: 0 0 20px 0;
 `;
 
 export const ItemPrice = styled.h3`
   font-size: 20px;
   color: #36427a;
   font-weight: bolder;
-  margin: 5px 0;
+  margin: 20px 0;
 `;
 
-export const QuantityWrapper = styled.div``;
-export const Cart = styled.div``;
+export const ItemQty = styled.div`
+  display: inline-block;
+  font-size: 20px;
+  color: #36427a;
+  font-weight: bolder;
+  margin: 20px 0;
+`;
+
+export const QuantityWrapper = styled.div`
+  display: inline-block;
+  font-size: 20px;
+  color: #36427a;
+  font-weight: bolder;
+  margin: 20px 0;
+`;
+
+export const ItemSelect = styled.select`
+  width: 100px;
+  height: 30px;
+  margin: 0 20px;
+`;
+export const ItemSelectOption = styled.option`
+  font-size: 16px;
+`;
+
+export const AddtoCart = styled.button`
+  background-color: #36427a;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 150px;
+`;
+
 export const SmallImg = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {
   NavWrapper,
   ItemDetailsWrapper,
@@ -14,8 +14,11 @@ import {
   ItemDetails,
   DescrHeading,
   ItemDescription,
+  ItemQty,
+  ItemSelect,
+  ItemSelectOption,
+  AddtoCart,
   QuantityWrapper,
-  Cart,
   SmallImg,
 } from "./style";
 import { makeStyles } from "@material-ui/core/styles";
@@ -28,6 +31,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { detailsItem } from "../../actions/itemActions";
 
 function Item(props) {
+  const [qty, setQty] = useState(1);
   const itemDetails = useSelector((state) => state.itemDetails);
   const { item, loading, error } = itemDetails;
   const dispatch = useDispatch();
@@ -38,6 +42,7 @@ function Item(props) {
       //
     };
   }, []);
+
   const useStyles = makeStyles((theme) => ({
     root: {
       "& > * + *": {
@@ -54,6 +59,9 @@ function Item(props) {
 
   const classes = useStyles();
 
+  const handleAddToCart = () => {
+    props.history.push("/cart/" + props.match.params.id + "?qty=" + qty);
+  };
   return loading ? (
     <div>Loading...</div>
   ) : error ? (
@@ -145,9 +153,27 @@ function Item(props) {
           <ItemDetails>
             <ItemName>{item.short_name}</ItemName>
             <ItemPrice>$ {item.Item_Price}</ItemPrice>
-
-            <QuantityWrapper></QuantityWrapper>
-            <Cart></Cart>
+            <ItemQty>
+              Status: {item.Item_Quantity > 4 ? "In Stock" : "Out of Stock"}
+            </ItemQty>
+            <QuantityWrapper>
+              Qty:
+              <ItemSelect
+                value={qty}
+                onChange={(e) => {
+                  setQty(e.target.value);
+                }}
+              >
+                {[...Array(item.Item_Quantity).keys()].map((x) => (
+                  <ItemSelectOption key={x + 1} value={x + 1}>
+                    {x + 1}
+                  </ItemSelectOption>
+                ))}
+              </ItemSelect>
+            </QuantityWrapper>
+            {item.Item_Quantity > 0 && (
+              <AddtoCart onClick={handleAddToCart}>Add to Cart</AddtoCart>
+            )}
           </ItemDetails>
           <ItemDescription>
             <DescrHeading>Description</DescrHeading>
