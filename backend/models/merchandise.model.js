@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-// example to create a model/Schema for cat
 const merchandiseSchema = new Schema(
   {
     Item_ID: { type: String, required: true },

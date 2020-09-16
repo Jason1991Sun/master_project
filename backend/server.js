@@ -17,6 +17,8 @@ app.use(express.json());
 
 // getting the mongoDB connection string
 const uri = process.env.ATLAS_URI;
+mongoose.set('useFindAndModify', false);
+
 // Connect to MongoDB Atlas
 mongoose
   .connect(uri, {
@@ -49,11 +51,14 @@ app.get("/api/items", (req, res) => {
   res.send(data.items);
 });
 
-const catsRouter = require("./routes/cats");
-const merchandisesRouter = require("./routes/merchandises");
+const catsRouter = require('./routes/cats');
+const merchandisesRouter = require('./routes/merchandises');
+const usersRouter = require('./routes/users');
 
-app.use("/cats", catsRouter);
-app.use("/merchandises", merchandisesRouter);
+app.use('/cats', catsRouter);
+app.use('/merchandises', merchandisesRouter);
+app.use('/users', usersRouter);
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
