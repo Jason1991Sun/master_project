@@ -16,6 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
 import{ useDispatch, useSelector } from "react-redux";
+import { login } from "../../actions/loginAction";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -37,30 +38,38 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function validateEmail(email) {
+  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}
+
 function onSubmit(e) {
   e.preventDefault();
 
-  const user = {
-    username: e.target.usernameOrEmail.value,
-    email: this.state.email,
-    password: e.target.password.value
-  };
+  if(validateEmail(e.target.usernameOrEmail.value)){
+    const user = {
+      email: e.target.usernameOrEmail.value,
+      password: e.target.password.value
+    };
+    console.log(user);
+  }else{
+    const user = {
+      username: e.target.usernameOrEmail.value,
+      password: e.target.password.value
+    };
+    console.log(user);
+  }
 
-  console.log(user);
+  //todo: add axios operations here to go to backend to verify user
+  const dispatch = useDispatch();
+  dispatch(login());
 
-  axios.post('http://localhost:5000/users/add', user)
-      .then(res => console.log(res.data));
-
-  this.setState({
-    username: '',
-    email: '',
-    password: ''
-  })
 }
 
-export default function SignIn() {
+export default function SignIn(props) {
   const classes = useStyles();
   const isLoggedIn = useSelector(state => state.loggedIn);
+  const dispatch = useDispatch();
 
   console.log(isLoggedIn);
 
