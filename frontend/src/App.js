@@ -9,7 +9,8 @@ import Contact from "./pages/contact";
 import Item from "./pages/item";
 import Cart from "./pages/cart";
 // change this later to real login page, for now we are testing signup
-import Login from "./pages/signup";
+import Login from "./pages/login";
+import Signup from "./pages/signup";
 
 export default function App() {
   return (
@@ -32,6 +33,9 @@ export default function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/signup">
+            <Signup/>
           </Route>
           <Route path="/cart/:id?" component={Cart} />
         </Switch>

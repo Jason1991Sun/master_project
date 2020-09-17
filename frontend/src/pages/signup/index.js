@@ -24,9 +24,9 @@ export default class CreateUser extends Component {
     this.onChangePassword = this.onChangePassword.bind(this);
 
     this.state = {
-      username: '',
-      email: '',
-      password: ''
+      username: null,
+      email: null,
+      password: null
     }
   }
 
