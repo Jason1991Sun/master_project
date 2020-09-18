@@ -5,7 +5,7 @@ let ShoppingCart = require('../models/shoppingCart.model');
 let OrderHistory = require('../models/orderHistory.model');
 
 // getting the existing users in the database
-router.route('/').get((req, res) => {
+router.route('/').post((req, res) => {
     // get a specific user by username
     if(req.body.username != null){
         User.findOne({username: req.body.username}, function(err, user){
@@ -20,11 +20,8 @@ router.route('/').get((req, res) => {
             else res.json(user);
         });
     }
-    //todo: will modify this 'else' statement in the future since we don't want user to see all customer records
     else{
-        User.find()
-        .then(users => res.json(users))
-        .catch(err => res.status(400).json('Database Get users Error: ' + err));
+        res.json('No user found with that username/email');
     }
 });
 

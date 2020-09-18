@@ -14,7 +14,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import axios from 'axios';
 import{ useDispatch, useSelector } from "react-redux";
 import { login } from "../../actions/loginAction";
 
@@ -43,35 +42,30 @@ function validateEmail(email) {
   return re.test(String(email).toLowerCase());
 }
 
-function onSubmit(e) {
-  e.preventDefault();
-
-  if(validateEmail(e.target.usernameOrEmail.value)){
-    const user = {
-      email: e.target.usernameOrEmail.value,
-      password: e.target.password.value
-    };
-    console.log(user);
-  }else{
-    const user = {
-      username: e.target.usernameOrEmail.value,
-      password: e.target.password.value
-    };
-    console.log(user);
-  }
-
-  //todo: add axios operations here to go to backend to verify user
-  const dispatch = useDispatch();
-  dispatch(login());
-
-}
-
 export default function SignIn(props) {
   const classes = useStyles();
-  const isLoggedIn = useSelector(state => state.loggedIn);
+  let isLoggedIn = useSelector(state => state.loggedIn);
   const dispatch = useDispatch();
 
-  console.log(isLoggedIn);
+  // handle form submit
+  function onSubmit(e) {
+    e.preventDefault();
+    let user;
+    if(validateEmail(e.target.usernameOrEmail.value)){
+      user = {
+        email: e.target.usernameOrEmail.value,
+        password: e.target.password.value
+      };
+      console.log(user);
+    }else{
+      user = {
+        username: e.target.usernameOrEmail.value,
+        password: e.target.password.value
+      };
+      console.log(user);
+    }
+    dispatch(login(user));
+  }
 
   return (
       <Container component="main" maxWidth="xs">
