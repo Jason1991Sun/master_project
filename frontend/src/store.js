@@ -8,10 +8,15 @@ import cartReducer from "./reducer/cartReducers";
 
 // check if there are cart items in the cookie
 const cartItems = Cookie.getJSON("cartItems") || [];
+// TODO: add more initial states from Cookie
 
+// set initial state for redux
 const initialState = { cart: { cartItems } };
 
-// combine all the reducers
+/*
+combine all the reducers：
+{ name_of_state: state}
+*/
 const allReducers = combineReducers({
   itemList: itemListReducer,
   itemDetails: itemDetailsReducer,
