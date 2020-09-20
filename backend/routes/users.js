@@ -3,6 +3,47 @@ const router = require('express').Router();
 let User = require('../models/user.model');
 let ShoppingCart = require('../models/shoppingCart.model');
 let OrderHistory = require('../models/orderHistory.model');
+import { getToken } from '../util';
+
+// adding routes for signin
+router.route('/signin').post((req, res) => {
+    // get a specific user by username
+    if(req.body.username != null){
+        User.findOne({username: req.body.username}, function(err, user){
+            if(err) res.status(400).send('no user found by that username err: ' + err);
+            else if(user.password === req.body.password){
+                res.send({
+                    _id: user._id,
+                    username: user.username,
+                    email: user.email,
+                    token: getToken(user)
+                })
+            }else{
+                res.status(401).send('wrong password');
+            }
+        });
+    }
+    // get a specific user by email
+    else if(req.body.email != null){
+        User.findOne({email: req.body.email}, function(err, user){
+            if(err) res.status(400).send('no user found by that email err: ' + err);
+            else if(user.password === req.body.password){
+                res.send({
+                    _id: user._id,
+                    username: user.username,
+                    email: user.email,
+                    token: getToken(user)
+                })
+            }else{
+                res.status(401).send('wrong password');
+            }
+        });
+    }
+    else{
+        res.json('invalid username/email input');
+    }
+});
+
 
 // getting the existing users in the database
 router.route('/').post((req, res) => {

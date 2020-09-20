@@ -1,5 +1,6 @@
 import express from "express";
 import cat from "./category";
+import config from "./config";
 
 // importing the middleware cors, https://www.npmjs.com/package/cors
 const cors = require("cors");
@@ -15,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 // getting the mongoDB connection string
-const uri = process.env.ATLAS_URI;
+const uri = config.MONGODB_URL;
 mongoose.set("useFindAndModify", false);
 
 // Connect to MongoDB Atlas
