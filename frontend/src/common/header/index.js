@@ -1,4 +1,6 @@
-import React, { Component } from "react";
+import React, { Fragment } from "react";
+import { useSelector } from "react-redux";
+
 import SearchIcon from "@material-ui/icons/Search";
 import {
   HeaderWrapper,
@@ -11,29 +13,38 @@ import {
   NavUserItem,
 } from "./style";
 
-class Header extends Component {
-  render() {
-    return (
-      <HeaderWrapper>
-        <TopNotice>free domestic shipping for orders over $45 AUD</TopNotice>
-        <Logo href="/"></Logo>
-        <NavWrapper>
-          <MainNav>
-            <NavItem href="/">Home</NavItem>
-            <NavItem href="/shop">Shop+</NavItem>
-            <NavItem href="/about">About</NavItem>
-            <NavItem href="/contact">Contact</NavItem>
-            <SearchIcon></SearchIcon>
-          </MainNav>
-          <UserNav>
-            <NavUserItem href="/login">Log in</NavUserItem>
-            <NavUserItem href="/cart">Cart</NavUserItem>
-            <NavUserItem href="/signUp">Sign Up</NavUserItem>
-          </UserNav>
-        </NavWrapper>
-      </HeaderWrapper>
-    );
-  }
+function Header() {
+  const userSignin = useSelector((state) => state.loggedIn);
+  const { userInfo } = userSignin;
+
+  return (
+    <HeaderWrapper>
+      <TopNotice>free domestic shipping for orders over $45 AUD</TopNotice>
+      <Logo href="/"></Logo>
+      <NavWrapper>
+        <MainNav>
+          <NavItem href="/">Home</NavItem>
+          <NavItem href="/shop">Shop+</NavItem>
+          <NavItem href="/about">About</NavItem>
+          <NavItem href="/contact">Contact</NavItem>
+          <SearchIcon></SearchIcon>
+        </MainNav>
+        <UserNav>
+          {userInfo ? (
+            <Fragment>
+              <NavUserItem href="/profile">{userInfo.username}</NavUserItem>
+              <NavUserItem href="/cart">Cart</NavUserItem>
+            </Fragment>
+          ) : (
+            <Fragment>
+              <NavUserItem href="/login">Log in</NavUserItem>
+              <NavUserItem href="/signUp">Sign Up</NavUserItem>
+            </Fragment>
+          )}
+        </UserNav>
+      </NavWrapper>
+    </HeaderWrapper>
+  );
 }
 
 export default Header;
