@@ -4,7 +4,12 @@ const Schema = mongoose.Schema;
 
 // use populate() method later to get the merchandises in the shopping cart
 const shoppingCartSchema = new Schema({
-    items: [{type: Schema.Types.ObjectId, ref: "Merchandise"}]
+    items: [
+        {
+            quantity: { type: Number, required: true }, 
+            merchandise: { type: Schema.Types.ObjectId, ref: "Merchandise" }
+        }
+    ]
 });
 
 const ShoppingCart = mongoose.model('ShoppingCart', shoppingCartSchema);

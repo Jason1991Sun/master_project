@@ -9,6 +9,7 @@ const merchandiseSchema = new Schema(
     Item_Code: { type: String, required: true },
     Item_Category: { type: String, required: true },
     Item_Color: { type: String, required: true },
+      // this quantity means how many we have in stock
     Item_Quantity: { type: Number, required: true },
     Item_Price: { type: Number, required: true },
     Fabric_Content: { type: String, required: true },
