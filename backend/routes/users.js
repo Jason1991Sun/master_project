@@ -16,6 +16,12 @@ router.route('/signin').post((req, res) => {
                     _id: user._id,
                     username: user.username,
                     email: user.email,
+                    shopping_cart: user.shopping_cart,
+                    order_history: user.order_history,
+                    address: user.address,
+                    additional_address: user.additional_address,
+                    phone_number: user.phone_number,
+                    profile_picture: user.profile_picture,
                     token: getToken(user)
                 })
             }else{

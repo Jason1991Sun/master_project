@@ -7,7 +7,7 @@ function Profile(props) {
 
   const handleLogout = () => {
     dispatch(logout());
-    props.history.push("/signUp");
+    props.history.push("/login");
   };
   return (
     <Fragment>

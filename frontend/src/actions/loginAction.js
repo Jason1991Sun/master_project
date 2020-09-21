@@ -12,6 +12,7 @@ export const login = (user) => async (dispatch) => {
     if (response.status === 200) {
       // make a copy of user information from the response's data and store it in Cookie
       const userInfo = { ...response.data };
+      console.log(userInfo);
       console.log("welcome back! " + userInfo.username);
       Cookie.set("userInfo", JSON.stringify(userInfo));
       dispatch({
