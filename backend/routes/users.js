@@ -91,6 +91,7 @@ router.route("/").post((req, res) => {
 router.route("/add").post((req, res) => {
   const username = req.body.username;
   const email = req.body.email;
+  const password = req.body.password;
   const phone_number = req.body.phone_number;
   const first_name = req.body.first_name;
   const last_name = req.body.last_name;
@@ -122,6 +123,7 @@ router.route("/add").post((req, res) => {
           const newUser = new User({
             username,
             email,
+            password,
             phone_number,
             first_name,
             last_name,
@@ -158,7 +160,7 @@ router.route("/:id").get((req, res) => {
 });
 
 // update a specific user using post request body
-router.route("/update/").post((req, res) => {
+router.route("/update").post((req, res) => {
   // copy the request body to a temporary storage
   let temp = { ...req.body };
   // get all the fields that needed to be updated (all the fields other than the username)

@@ -122,8 +122,6 @@ export default class CreateUser extends Component {
       postCode: this.state.postCode,
     };
 
-    console.log(user);
-
     axios
       .post("http://localhost:5000/users/add", user)
       .then((res) => console.log(res.data));
