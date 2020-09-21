@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import Cookie from "js-cookie";
 
 import { itemListReducer, itemDetailsReducer } from "./reducer/itemReducers";
-import loggedInReducer from "./reducer/loggedInReducer";
+import loginReducers from "./reducer/loginReducers";
 import cartReducer from "./reducer/cartReducers";
 
 // check if there are cart items in the cookie
@@ -21,7 +21,7 @@ const allReducers = combineReducers({
   itemList: itemListReducer,
   itemDetails: itemDetailsReducer,
   cart: cartReducer,
-  loggedIn: loggedInReducer,
+  loggedIn: loginReducers,
 });
 
 // detect whether the browser has redux extension installed
