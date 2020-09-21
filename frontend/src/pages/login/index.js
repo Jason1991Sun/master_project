@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment, useEffect, useState } from "react";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -42,8 +42,25 @@ function validateEmail(email) {
 
 export default function SignIn(props) {
   const classes = useStyles();
-  let isLoggedIn = useSelector(state => state.loggedIn);
+  const loggedIn = useSelector(state => state.loggedIn);
+  const { loading, userInfo, error } = loggedIn;
   const dispatch = useDispatch();
+
+  console.log(loggedIn);
+  console.log(userInfo);
+
+  //TODO: finish useEffect to jump back to home screen is user is already logged in
+
+  /*
+  useEffect(() => {
+    if(userInfo) {
+      props.history.push("/")
+    }
+    return () => {
+      //
+    }
+  }, [userInfo]);
+  */
 
   // handle form submit
   function onSubmit(e) {
@@ -112,6 +129,11 @@ export default function SignIn(props) {
                 <Link href="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
+              </Grid>
+              <br/>
+              <Grid item>
+                {loading && <div>loading ...</div>}
+                {error && <div>{error}</div>}
               </Grid>
             </Grid>
           </form>
