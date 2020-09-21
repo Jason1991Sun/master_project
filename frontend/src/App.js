@@ -11,6 +11,7 @@ import Cart from "./pages/cart";
 // change this later to real login page, for now we are testing signup
 import Login from "./pages/login";
 import Signup from "./pages/signup";
+import Profile from "./pages/profile";
 
 export default function App() {
   return (
@@ -33,6 +34,8 @@ export default function App() {
           </Route>
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
+          <Route path="/profile" component={Profile} />
+
           <Route path="/cart/:id?" component={Cart} />
         </Switch>
       </Fragment>
