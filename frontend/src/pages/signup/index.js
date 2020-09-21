@@ -112,14 +112,14 @@ export default class CreateUser extends Component {
       username: this.state.username,
       email: this.state.email,
       password: this.state.password,
-      phoneNumber: this.state.phoneNumber,
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
+      phone_number: this.state.phoneNumber,
+      first_name: this.state.firstName,
+      last_name: this.state.lastName,
       country: this.state.country,
-      streetAddress: this.state.streetAddress,
+      street_address: this.state.streetAddress,
       suburb: this.state.suburb,
       state: this.state.state,
-      postCode: this.state.postCode,
+      post_code: this.state.postCode,
     };
 
     axios
