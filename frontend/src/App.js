@@ -31,12 +31,8 @@ export default function App() {
           <Route path="/" exact>
             <Home />
           </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/signup">
-            <Signup/>
-          </Route>
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
           <Route path="/cart/:id?" component={Cart} />
         </Switch>
       </Fragment>
