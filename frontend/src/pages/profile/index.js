@@ -1,18 +1,262 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/loginAction";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Paper from '@material-ui/core/Paper';
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(3),
+  },
+  form_element: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1)
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
+
+
+// react function component Profile
 function Profile(props) {
+  // setup redux functionality
   const dispatch = useDispatch();
+  const loggedIn = useSelector((state) => state.loggedIn);
 
+  // for debug purpose, delete later
+  console.log(loggedIn.userInfo);
+
+  // setup material UI styles
+  const classes = useStyles();
+
+  // setup component state using the data from redux state
+  const [username, setUsername] = useState(loggedIn.userInfo.username);
+  const [email, setEmail] = useState(loggedIn.userInfo.email);
+  const [phoneNumber, setPhoneNumber] = useState(loggedIn.userInfo.phone_number);
+  const [firstName, setFirstName] = useState(loggedIn.userInfo.first_name);
+  const [lastName, setLastName] = useState(loggedIn.userInfo.last_name);
+  const [country, setCountry] = useState(loggedIn.userInfo.country);
+  const [streetAddress, setStreetAddress] = useState(loggedIn.userInfo.street_address);
+  // what does suburb mean?
+  //const [suburb, setSuburb] = useState(loggedIn.userInfo.suburb);
+  const [state, setState] = useState(loggedIn.userInfo.state);
+  const [postCode, setPostCode] = useState(loggedIn.userInfo.post_code);
+  const [shoppingCart, setShoppingCart] = useState(loggedIn.userInfo.shopping_cart);
+  const [orderHistory, setOrderHistory] = useState(loggedIn.userInfo.order_history);
+
+  // function to handle logout button click
   const handleLogout = () => {
     dispatch(logout());
     props.history.push("/login");
   };
+
+  const handleProfileUpdate = () => {
+    //todo
+    console.log('username: ' + username);
+    console.log('email: ' + email);
+    console.log(phoneNumber);
+    console.log(firstName);
+    console.log(lastName);
+    console.log(country);
+    console.log(streetAddress);
+    console.log(state);
+    console.log(postCode);
+  };
+
+  const selectCountry = (val) => {
+    setCountry(val);
+  };
+
+  const selectRegion = (val) => {
+    setState(val);
+  };
+
+  const changeUsername = (val) => {
+    setUsername(val);
+  };
+
+  const changeEmail = (val) => {
+    setEmail(val);
+  };
+
+  const changePhoneNumber = (val) => {
+    setPhoneNumber(val);
+  };
+
+  const changeFirstName = (val) => {
+    setFirstName(val);
+  };
+
+  const changeLastName = (val) => {
+    setLastName(val);
+  };
+
+  const changeAddress = (val) => {
+    setStreetAddress(val);
+  };
+
+  const changePostCode = (val) => {
+    setPostCode(val);
+  };
+
   return (
-    <Fragment>
-      <button onClick={handleLogout}>Log Out</button>
-    </Fragment>
+      <Fragment>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <div className={classes.paper}>
+              <Typography component="h1" variant="h5">
+              User Profile
+              </Typography>
+              <form className={classes.form}>
+
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="username"
+                    label="Username"
+                    name="username"
+                    defaultValue={username}
+                    onChange={(e) => changeUsername(e.target.value)}
+                />
+
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email"
+                    name="email"
+                    defaultValue={email}
+                    onChange={(e) => changeEmail(e.target.value)}
+                />
+
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    id="phoneNumber"
+                    label="Phone Number"
+                    name="phoneNumber"
+                    defaultValue={phoneNumber}
+                    onChange={(e) => changePhoneNumber(e.target.value)}
+                />
+
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  fullWidth
+                  id="firstName"
+                  label="First Name"
+                  name="firstName"
+                  defaultValue={firstName}
+                  onChange={(e) => changeFirstName(e.target.value)}
+              />
+
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    id="lastName"
+                    label="Last Name"
+                    name="lastName"
+                    defaultValue={lastName}
+                    onChange={(e) => changeLastName(e.target.value)}
+                />
+
+                <CountryDropdown
+                    value={country}
+                    className={classes.form_element}
+                    style={{
+                      fontSize: 15
+                    }}
+                    onChange={(val) => selectCountry(val)} />
+
+                <RegionDropdown
+                    country={country}
+                    className={classes.form_element}
+                    value={state}
+                    style={{
+                      fontSize: 15
+                    }}
+                    showDefaultOption={true}
+                    defaultOptionLabel={"select region"}
+                    onChange={(val) => selectRegion(val)} />
+
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    id="streetAddress"
+                    label="Address"
+                    name="streetAddress"
+                    defaultValue={streetAddress}
+                    onChange={(e) => changeAddress(e.target.value)}
+                />
+
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    id="postCode"
+                    label="Postal Code / Zip code"
+                    name="postCode"
+                    defaultValue={streetAddress}
+                    onChange={(e) => changePostCode(e.target.value)}
+                />
+
+                <Button
+                    fullWidth
+                    margin="normal"
+                    className={classes.form_element}
+                    variant="contained"
+                    color="primary"
+                    onClick={handleProfileUpdate}>
+                  Update Profile
+                </Button>
+
+                <Button
+                    fullWidth
+                    margin="normal"
+                    className={classes.form_element}
+                    variant="contained"
+                    color="secondary"
+                    onClick={handleLogout}>
+                  Log Out
+                </Button>
+
+              </form>
+          </div>
+        </Container>
+      </Fragment>
   );
 }
 

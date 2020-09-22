@@ -124,12 +124,9 @@ export default function SignIn(props) {
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
-            <br />
-            <Grid item>
-              {loading && <div>loading ...</div>}
-              {error && <div>{error}</div>}
-            </Grid>
           </Grid>
+          {loading && <div>loading ...</div>}
+          {error && <div>{error}</div>}
         </form>
       </div>
       <Box mt={8}></Box>

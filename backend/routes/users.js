@@ -5,7 +5,7 @@ let ShoppingCart = require("../models/shoppingCart.model");
 let OrderHistory = require("../models/orderHistory.model");
 import { getToken } from "../util";
 
-// adding routes for signin
+// adding routes for signin, password field is left undefined intentionally
 router.route("/signin").post((req, res) => {
   // get a specific user by username
   if (req.body.username != null) {
@@ -138,7 +138,7 @@ router.route("/add").post((req, res) => {
 
           newUser
             .save()
-            .then(() => res.json("new user added!"))
+            .then(() => res.json("new user added!" + newUser))
             .catch((err) =>
               res.status(400).json("Database Add User Error: " + err)
             );
