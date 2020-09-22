@@ -164,14 +164,14 @@ router.route("/update").post((req, res) => {
   // copy the request body to a temporary storage
   let temp = { ...req.body };
   // get all the fields that needed to be updated (all the fields other than the username)
-  delete temp["username"];
+  delete temp["email"];
   User.findOneAndUpdate(
-    { username: req.body.username },
+    { email: req.body.email },
     { $set: temp },
     { new: true },
     function (err, user) {
       if (err) res.status(400).json("update user err: " + err);
-      res.json("user updated: " + user);
+      res.json("user updated: " + JSON.stringify(user) + " with " + JSON.stringify(temp));
     }
   );
 });

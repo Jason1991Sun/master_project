@@ -16,6 +16,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -49,26 +50,24 @@ function Profile(props) {
   const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.loggedIn);
 
-  // for debug purpose, delete later
-  console.log(loggedIn.userInfo);
-
   // setup material UI styles
   const classes = useStyles();
 
   // setup component state using the data from redux state
   const [username, setUsername] = useState(loggedIn.userInfo.username);
   const [email, setEmail] = useState(loggedIn.userInfo.email);
+  const [password, setPassword] = useState(loggedIn.userInfo.password);
   const [phoneNumber, setPhoneNumber] = useState(loggedIn.userInfo.phone_number);
   const [firstName, setFirstName] = useState(loggedIn.userInfo.first_name);
   const [lastName, setLastName] = useState(loggedIn.userInfo.last_name);
   const [country, setCountry] = useState(loggedIn.userInfo.country);
   const [streetAddress, setStreetAddress] = useState(loggedIn.userInfo.street_address);
-  // what does suburb mean?
-  //const [suburb, setSuburb] = useState(loggedIn.userInfo.suburb);
+  const [suburb, setSuburb] = useState(loggedIn.userInfo.suburb);
   const [state, setState] = useState(loggedIn.userInfo.state);
   const [postCode, setPostCode] = useState(loggedIn.userInfo.post_code);
   const [shoppingCart, setShoppingCart] = useState(loggedIn.userInfo.shopping_cart);
   const [orderHistory, setOrderHistory] = useState(loggedIn.userInfo.order_history);
+  const [alertOnce, setAlertOnce] = useState(false);
 
   // function to handle logout button click
   const handleLogout = () => {
@@ -77,16 +76,25 @@ function Profile(props) {
   };
 
   const handleProfileUpdate = () => {
-    //todo
-    console.log('username: ' + username);
-    console.log('email: ' + email);
-    console.log(phoneNumber);
-    console.log(firstName);
-    console.log(lastName);
-    console.log(country);
-    console.log(streetAddress);
-    console.log(state);
-    console.log(postCode);
+    const user = {
+      username: username,
+      email: email,
+      password: password,
+      phone_number: phoneNumber,
+      first_name: firstName,
+      last_name: lastName,
+      country: country,
+      street_address: streetAddress,
+      suburb: suburb,
+      state: state,
+      post_code: postCode,
+    };
+
+    console.log(user);
+
+    axios
+        .post("http://localhost:5000/users/update", user)
+        .then((res) => console.log(res.data));
   };
 
   const selectCountry = (val) => {
@@ -125,6 +133,22 @@ function Profile(props) {
     setPostCode(val);
   };
 
+  const changeSuburb = (val) => {
+    setSuburb(val);
+  };
+
+  const changePassword = (val) => {
+    setPassword(val);
+  };
+
+  const passwordOnFocus = (e) => {
+    if(!alertOnce) {
+      alert('Modify Password field only if you want to change your current password!');
+      setAlertOnce(true);
+      e.target.blur();
+    }
+  };
+
   return (
       <Fragment>
         <Container component="main" maxWidth="xs">
@@ -157,6 +181,18 @@ function Profile(props) {
                     name="email"
                     defaultValue={email}
                     onChange={(e) => changeEmail(e.target.value)}
+                />
+
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    id="password"
+                    label="Password"
+                    name="password"
+                    defaultValue={password}
+                    onChange={(e) => changePhoneNumber(e.target.value)}
+                    onFocus={passwordOnFocus}
                 />
 
                 <TextField
@@ -215,6 +251,17 @@ function Profile(props) {
                     variant="outlined"
                     margin="normal"
                     fullWidth
+                    id="suburb"
+                    label="Suburb"
+                    name="suburb"
+                    defaultValue={suburb}
+                    onChange={(e) => changeSuburb(e.target.value)}
+                />
+
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
                     id="streetAddress"
                     label="Address"
                     name="streetAddress"
@@ -253,6 +300,9 @@ function Profile(props) {
                   Log Out
                 </Button>
 
+                <Link href="/orderHistory">
+                  {//todo add order history page
+                } View your Order History </Link>
               </form>
           </div>
         </Container>
