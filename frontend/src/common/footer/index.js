@@ -20,23 +20,40 @@ class Footer extends Component {
             <Logo href="/"></Logo>
             <FooterNavWrapper>
               <NavItem href="/about">About</NavItem>
-              <NavItem href="/">Shipping And Delivery</NavItem>
-              <NavItem href="/">SHop Policy</NavItem>
+              <NavItem href="/faq">Shipping And Delivery</NavItem>
+              <NavItem href="/faq">SHop Policy</NavItem>
               <NavItem href="/faq">FAQ</NavItem>
             </FooterNavWrapper>
             <SocialWrapper>
               <SocialItem href="/contact">Contact Us</SocialItem>
-              <SocialItem href="/">makecistore@gamil.com</SocialItem>
+              <SocialItem href={"mailto:makecistore@gmail.com"} target="_blank">
+                makecistore@gamil.com
+              </SocialItem>
               <SocialPicWrapper>
-                <SocialPic
-                  src={process.env.PUBLIC_URL + "/images/mail.jpg"}
-                ></SocialPic>
-                <SocialPic
-                  src={process.env.PUBLIC_URL + "/images/facebook.jpg"}
-                ></SocialPic>
-                <SocialPic
-                  src={process.env.PUBLIC_URL + "/images/insta.jpg"}
-                ></SocialPic>
+                <SocialItem
+                  href={"mailto:makecistore@gmail.com"}
+                  target="_blank"
+                >
+                  <SocialPic
+                    src={process.env.PUBLIC_URL + "/images/mail.jpg"}
+                  ></SocialPic>
+                </SocialItem>
+                <SocialItem
+                  href="https://www.facebook.com/makecistore/"
+                  target="_blank"
+                >
+                  <SocialPic
+                    src={process.env.PUBLIC_URL + "/images/facebook.jpg"}
+                  ></SocialPic>
+                </SocialItem>
+                <SocialItem
+                  href="https://www.instagram.com/makeci_store/"
+                  target="_blank"
+                >
+                  <SocialPic
+                    src={process.env.PUBLIC_URL + "/images/insta.jpg"}
+                  ></SocialPic>
+                </SocialItem>
               </SocialPicWrapper>
             </SocialWrapper>
           </ContentWrapper>

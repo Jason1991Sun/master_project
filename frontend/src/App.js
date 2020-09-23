@@ -13,6 +13,7 @@ import Login from "./pages/login";
 import Signup from "./pages/signup";
 import Profile from "./pages/profile";
 import Checkout from "./pages/checkout";
+import Faq from "./pages/faq";
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
           <Route path="/contact">
             <Contact />
           </Route>
+          <Route path="/faq" component={Faq} />
           <Route path="/items/:id" component={Item} />
           <Route path="/" exact>
             <Home />
@@ -37,7 +39,6 @@ export default function App() {
           <Route path="/signup" component={Signup} />
           <Route path="/profile" component={Profile} />
           <Route path="/checkout" component={Checkout} />
-
           <Route path="/cart/:id?" component={Cart} />
         </Switch>
       </Fragment>
