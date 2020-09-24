@@ -33,6 +33,7 @@ export const login = (user) => async (dispatch) => {
 
 export const updateProfile = (user) => {
   console.log("Updating user profile info");
+  Cookie.set("userInfo", JSON.stringify(user));
   return({
     type: "UPDATE",
     payload: user

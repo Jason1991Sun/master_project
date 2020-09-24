@@ -182,7 +182,7 @@ function Profile(props) {
                 />
 
                 <TextField
-                    variant="outlined"
+                    variant="filled"
                     margin="normal"
                     fullWidth
                     id="email"
@@ -190,7 +190,7 @@ function Profile(props) {
                     name="email"
                     defaultValue={email}
                     InputProps={{
-                      readOnly: true,
+                      readOnly: true
                     }}
                     //onChange={(e) => changeEmail(e.target.value)}
                 />
