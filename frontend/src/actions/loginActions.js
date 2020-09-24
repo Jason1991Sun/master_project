@@ -31,6 +31,14 @@ export const login = (user) => async (dispatch) => {
   }
 };
 
+export const updateProfile = (user) => {
+  console.log("Updating user profile info");
+  return({
+    type: "UPDATE",
+    payload: user
+  });
+};
+
 export const logout = () => (dispatch) => {
   Cookie.remove("userInfo");
   dispatch({ type: "LOGOUT" });

@@ -13,7 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../actions/loginAction";
+import { login } from "../../actions/loginActions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -46,7 +46,7 @@ export default function SignIn(props) {
   const { loading, userInfo, error } = loggedIn;
   const dispatch = useDispatch();
 
-  console.log(loggedIn);
+  //console.log(loggedIn);
   useEffect(() => {
     if (userInfo) {
       props.history.push("/");

@@ -1,4 +1,4 @@
-const loginReducers = (state = {}, action) => {
+const loginReducers = (state = false, action) => {
   switch (action.type) {
     case "LOGIN_REQUEST":
       return { loading: true };
@@ -9,7 +9,9 @@ const loginReducers = (state = {}, action) => {
     case "LOGIN_ERR":
       return { loading: false, error: action.payload };
     case "LOGOUT":
-      return {};
+      return false;
+    case "UPDATE":
+      return { loading: false, userInfo: action.payload};
     default:
       return state;
   }

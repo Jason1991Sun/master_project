@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../actions/loginAction";
+import {login, logout, updateProfile} from "../../actions/loginActions";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -75,6 +75,7 @@ function Profile(props) {
     props.history.push("/login");
   };
 
+  // function to update user profile through DB operations
   const handleProfileUpdate = () => {
     const user = {
       username: username,
@@ -90,11 +91,17 @@ function Profile(props) {
       post_code: postCode,
     };
 
-    console.log(user);
-
+    //console.log(user);
     axios
         .post("http://localhost:5000/users/update", user)
-        .then((res) => console.log(res.data));
+        .then((res) => {
+          //console.log(res.data);
+          dispatch(updateProfile(res.data));
+          alert("Profile updated successfully")
+        })
+        .catch(err => {
+          console.log(err);
+        });
   };
 
   const selectCountry = (val) => {
@@ -109,9 +116,12 @@ function Profile(props) {
     setUsername(val);
   };
 
+  // user is not allowed to change email
+  /*
   const changeEmail = (val) => {
     setEmail(val);
   };
+  */
 
   const changePhoneNumber = (val) => {
     setPhoneNumber(val);
@@ -174,13 +184,15 @@ function Profile(props) {
                 <TextField
                     variant="outlined"
                     margin="normal"
-                    required
                     fullWidth
                     id="email"
-                    label="Email"
+                    label="Email (read only)"
                     name="email"
                     defaultValue={email}
-                    onChange={(e) => changeEmail(e.target.value)}
+                    InputProps={{
+                      readOnly: true,
+                    }}
+                    //onChange={(e) => changeEmail(e.target.value)}
                 />
 
                 <TextField
@@ -191,7 +203,7 @@ function Profile(props) {
                     label="Password"
                     name="password"
                     defaultValue={password}
-                    onChange={(e) => changePhoneNumber(e.target.value)}
+                    onChange={(e) => changePassword(e.target.value)}
                     onFocus={passwordOnFocus}
                 />
 
@@ -276,7 +288,7 @@ function Profile(props) {
                     id="postCode"
                     label="Postal Code / Zip code"
                     name="postCode"
-                    defaultValue={streetAddress}
+                    defaultValue={postCode}
                     onChange={(e) => changePostCode(e.target.value)}
                 />
 

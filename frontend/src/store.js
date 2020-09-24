@@ -8,7 +8,7 @@ import cartReducer from "./reducer/cartReducers";
 
 // check if there are cart items in the cookie
 const cartItems = Cookie.getJSON("cartItems") || [];
-const loggedIn = Cookie.getJSON("userInfo") ? { loading: false, userInfo: Cookie.getJSON("userInfo")} : {};
+const loggedIn = Cookie.getJSON("userInfo") ? { loading: false, userInfo: Cookie.getJSON("userInfo")} : false;
 
 // set initial state for redux
 const initialState = { cart: { cartItems }, loggedIn: loggedIn };

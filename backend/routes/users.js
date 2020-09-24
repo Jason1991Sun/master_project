@@ -66,7 +66,7 @@ router.route("/signin").post((req, res) => {
   }
 });
 
-// getting the existing users in the database
+// getting the existing users in the database, for debugging only
 router.route("/").post((req, res) => {
   // get a specific user by username
   if (req.body.username != null) {
@@ -152,7 +152,7 @@ router.route("/add").post((req, res) => {
     );
 });
 
-// fetch a specific user by id
+// fetch a specific user by id, for debugging only
 router.route("/:id").get((req, res) => {
   User.findById(req.params.id)
     .then((user) => res.json(user))
@@ -163,7 +163,7 @@ router.route("/:id").get((req, res) => {
 router.route("/update").post((req, res) => {
   // copy the request body to a temporary storage
   let temp = { ...req.body };
-  // get all the fields that needed to be updated (all the fields other than the username)
+  // get all the fields that needed to be updated (all the fields other than the email)
   delete temp["email"];
   User.findOneAndUpdate(
     { email: req.body.email },
@@ -171,12 +171,16 @@ router.route("/update").post((req, res) => {
     { new: true },
     function (err, user) {
       if (err) res.status(400).json("update user err: " + err);
-      res.json("user updated: " + JSON.stringify(user) + " with " + JSON.stringify(temp));
+      let updatedUser = user.toJSON();
+      // should not reveal user's password at all times
+      delete updatedUser["password"];
+      updatedUser.token = getToken(user);
+      res.json(updatedUser);
     }
   );
 });
 
-//delete a specific user using delete request body
+// delete a specific user using delete request body
 router.route("/").delete((req, res) => {
   User.findOneAndDelete({ username: req.body.username }, function (err, user) {
     if (err) res.status(400).json("delete user error: " + err);
