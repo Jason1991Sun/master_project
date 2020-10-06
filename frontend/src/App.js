@@ -15,6 +15,7 @@ import Profile from "./pages/profile";
 import Checkout from "./pages/checkout";
 import Faq from "./pages/faq";
 import History from "./pages/history";
+import Content from "./pages/content";
 
 export default function App() {
   return (
@@ -22,26 +23,19 @@ export default function App() {
       <Header />
       <Fragment>
         <Switch>
-          <Route path="/shop">
-            <Shop />
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/contact">
-            <Contact />
-          </Route>
+          <Route path="/shop" component={Shop} />
+          <Route path="/about" component={About} />
+          <Route path="/contact" component={Contact} />
           <Route path="/faq" component={Faq} />
           <Route path="/items/:id" component={Item} />
-          <Route path="/" exact>
-            <Home />
-          </Route>
+          <Route path="/content" component={Content} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
           <Route path="/profile" component={Profile} />
           <Route path="/checkout" component={Checkout} />
           <Route path="/orderHistory" component={History} />
           <Route path="/cart/:id?" component={Cart} />
+          <Route path="/" exact component={Home} />
         </Switch>
       </Fragment>
       <Footer />
