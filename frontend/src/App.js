@@ -14,6 +14,7 @@ import Signup from "./pages/signup";
 import Profile from "./pages/profile";
 import Checkout from "./pages/checkout";
 import Faq from "./pages/faq";
+import History from "./pages/history";
 
 export default function App() {
   return (
@@ -39,6 +40,7 @@ export default function App() {
           <Route path="/signup" component={Signup} />
           <Route path="/profile" component={Profile} />
           <Route path="/checkout" component={Checkout} />
+          <Route path="/orderHistory" component={History} />
           <Route path="/cart/:id?" component={Cart} />
         </Switch>
       </Fragment>
