@@ -1,18 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
 import { saveItem, listItems, deleteItem } from "../../actions/itemActions";
 import {
   ContentWraper,
   ContentHeaderWraper,
   ContentHeader,
+  FormHeading,
   CreateButton,
+  FromButton,
   ItemListWraper,
   ItemListTable,
   ItemListTHead,
   ItemListTH,
   ItemListTBody,
 } from "./style";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginBottom: theme.spacing(3),
+    border: "1px solid grey",
+    display: "inline-flex",
+    flexWrap: "wrap",
+
+    "& .MuiTextField-root": {
+      margin: theme.spacing(2),
+      width: "23%",
+    },
+  },
+}));
 
 function Content(props) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -31,7 +50,7 @@ function Content(props) {
   const [Item_Color, setItem_Color] = useState("");
   const itemList = useSelector((state) => state.itemList);
   const { items, loading, error } = itemList;
-
+  const classes = useStyles();
   const itemSave = useSelector((state) => state.itemSave);
   const {
     loading: loadingSave,
@@ -110,121 +129,98 @@ function Content(props) {
         <CreateButton onClick={() => openModal({})}>Create Item</CreateButton>
       </ContentHeaderWraper>
       {modalVisible && (
-        <div className="form">
-          <form onSubmit={submitHandler}>
-            <ul className="form-container">
-              <li>
-                <h2> {id ? "Update Item" : "Create Item"}</h2>
-              </li>
-              <li>
-                {loadingSave && <div>Loading...</div>}
-                {errorSave && <div>{errorSave}</div>}
-              </li>
-              <li>
-                <label htmlFor="Item Name">Item Name</label>
-                <input
-                  type="text"
-                  name="Item Name"
-                  value={Item_Name}
-                  id="Item_Name"
-                  onChange={(e) => setItem_Name(e.target.value)}
-                ></input>
-              </li>
-              <li>
-                <label htmlFor="name">Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={short_name}
-                  id="name"
-                  onChange={(e) => setName(e.target.value)}
-                ></input>
-              </li>
-              <li>
-                <label htmlFor="name">Code</label>
-                <input
-                  type="text"
-                  name="Item Code"
-                  value={Item_Code}
-                  id="Item Code"
-                  onChange={(e) => setName(e.target.value)}
-                ></input>
-              </li>
-              <li>
-                <label htmlFor="price">Price</label>
-                <input
-                  type="text"
-                  name="price"
-                  value={Item_Price}
-                  id="price"
-                  onChange={(e) => setPrice(e.target.value)}
-                ></input>
-              </li>
-              <li>
-                <label htmlFor="countInStock">Quantity</label>
-                <input
-                  type="text"
-                  name="countInStock"
-                  value={Item_Quantity}
-                  id="countInStock"
-                  onChange={(e) => setQuantity(e.target.value)}
-                ></input>
-              </li>
-              <li>
-                <label htmlFor="name">Category</label>
-                <input
-                  type="text"
-                  name="category"
-                  value={Item_Category}
-                  id="category"
-                  onChange={(e) => setCategory(e.target.value)}
-                ></input>
-              </li>
-              <li>
-                <label htmlFor="name">Color</label>
-                <input
-                  type="text"
-                  name="color"
-                  value={Item_Color}
-                  id="color"
-                  onChange={(e) => setItem_Color(e.target.value)}
-                ></input>
-              </li>
-              <li>
-                <label htmlFor="name">Fabric Content</label>
-                <input
-                  type="text"
-                  name="Fabric_Content"
-                  value={Fabric_Content}
-                  id="Fabric_Content"
-                  onChange={(e) => setFabric_Content(e.target.value)}
-                ></input>
-              </li>
-
-              <li>
-                <label htmlFor="description">Description</label>
-                <textarea
-                  name="description"
-                  value={Description}
-                  id="description"
-                  onChange={(e) => setDescription(e.target.value)}
-                ></textarea>
-              </li>
-              <li>
-                <button type="submit" className="button primary">
-                  {id ? "Update" : "Create"}
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => setModalVisible(false)}
-                  className="button secondary"
-                >
-                  Back
-                </button>
-              </li>
-            </ul>
+        <div>
+          <form
+            className={classes.form}
+            noValidate
+            autoComplete="off"
+            onSubmit={submitHandler}
+          >
+            <FormHeading> {id ? "Update Item" : "Create Item"}</FormHeading>
+            <div>
+              {loadingSave && <div>Loading...</div>}
+              {errorSave && <div>{errorSave}</div>}
+            </div>
+            <TextField
+              variant="outlined"
+              label="Item Name"
+              name="Item Name"
+              value={Item_Name}
+              id="Item_Name"
+              onChange={(e) => setItem_Name(e.target.value)}
+            />
+            <TextField
+              variant="outlined"
+              label="Name"
+              name="name"
+              value={short_name}
+              id="name"
+              onChange={(e) => setName(e.target.value)}
+            />
+            <TextField
+              variant="outlined"
+              label="Item Code"
+              name="Item Code"
+              value={Item_Code}
+              id="Item Code"
+              onChange={(e) => setItem_Code(e.target.value)}
+            />
+            <TextField
+              variant="outlined"
+              label="Price"
+              name="price"
+              value={Item_Price}
+              id="price"
+              onChange={(e) => setPrice(e.target.value)}
+            />
+            <TextField
+              variant="outlined"
+              label="Quantity"
+              name="quantity"
+              value={Item_Quantity}
+              id="quantity"
+              onChange={(e) => setQuantity(e.target.value)}
+            />
+            <TextField
+              variant="outlined"
+              label="Category"
+              name="category"
+              value={Item_Category}
+              id="category"
+              onChange={(e) => setCategory(e.target.value)}
+            />
+            <TextField
+              variant="outlined"
+              label="Color"
+              name="color"
+              value={Item_Color}
+              id="color"
+              onChange={(e) => setItem_Color(e.target.value)}
+            />
+            <TextField
+              variant="outlined"
+              label="Fabric Content"
+              name="Fabric_Content"
+              value={Fabric_Content}
+              id="Fabric_Content"
+              onChange={(e) => setFabric_Content(e.target.value)}
+            />
+            <TextField
+              label="Description"
+              multiline
+              rows={4}
+              name="description"
+              value={Description}
+              id="description"
+              onChange={(e) => setDescription(e.target.value)}
+              variant="outlined"
+            />
+            <div>
+              <FromButton type="submit">{id ? "Update" : "Create"}</FromButton>
+              <FromButton onClick={() => setModalVisible(false)}>
+                Back
+              </FromButton>
+            </div>
           </form>
         </div>
       )}
@@ -235,7 +231,10 @@ function Content(props) {
             <tr>
               <ItemListTH>ID</ItemListTH>
               <ItemListTH>Name</ItemListTH>
+              <ItemListTH>Code</ItemListTH>
               <ItemListTH>Price</ItemListTH>
+              <ItemListTH>Color</ItemListTH>
+              <ItemListTH>Fabric Content</ItemListTH>
               <ItemListTH>Category</ItemListTH>
               <ItemListTH>Quantity</ItemListTH>
               <ItemListTH>Action</ItemListTH>
@@ -246,7 +245,10 @@ function Content(props) {
               <tr key={item._id}>
                 <td>{item._id}</td>
                 <td>{item.short_name}</td>
+                <td>{item.Item_Code}</td>
                 <td>{item.Item_Price}</td>
+                <td>{item.Item_Color}</td>
+                <td>{item.Fabric_Content}</td>
                 <td>{item.Item_Category}</td>
                 <td>{item.Item_Quantity}</td>
                 <td>
