@@ -16,12 +16,15 @@ import {
 function Header() {
   const userSignin = useSelector((state) => state.loggedIn);
   const { userInfo } = userSignin;
-  const userEmail = userInfo.email;
-  const adminEmail = "jason@test.com";
   let isAdmin = false;
 
-  if (userEmail === adminEmail) {
-    isAdmin = true;
+  if (userInfo) {
+    const userEmail = userInfo.email;
+    const adminEmail = "jason@test.com";
+
+    if (userEmail === adminEmail) {
+      isAdmin = true;
+    }
   }
 
   return (
