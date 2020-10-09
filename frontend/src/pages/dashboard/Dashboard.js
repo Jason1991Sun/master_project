@@ -1,9 +1,13 @@
 import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../actions/loginActions";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+
 import Paper from "@material-ui/core/Paper";
 import Chart from "./Chart";
 import Deposits from "./Deposits";
@@ -13,6 +17,7 @@ import ReactGA from "react-ga";
 const drawerWidth = 240;
 ReactGA.initialize("UA-000000-01");
 ReactGA.pageview(window.location.pathname + window.location.search);
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -85,26 +90,36 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     overflow: "auto",
     flexDirection: "column",
+    alignItems: "center",
   },
   fixedHeight: {
     height: 240,
   },
+  logout: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(3),
+    width: "100%",
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
+    maxWidth: "300px",
+  },
 }));
 
-export default function Dashboard() {
+export default function Dashboard(props) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
-  const toggleDrawer = () => {
-    setOpen(!open);
-  };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const dispatch = useDispatch();
 
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const handleLogout = () => {
+    dispatch(logout());
+    props.history.push("/login");
+  };
   return (
     <div className={classes.root}>
       <CssBaseline />
 
       <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
             {/* Chart */}
@@ -127,6 +142,15 @@ export default function Dashboard() {
             </Grid>
           </Grid>
         </Container>
+        <Button
+          fullWidth
+          className={classes.logout}
+          variant="contained"
+          color="secondary"
+          onClick={handleLogout}
+        >
+          Log Out
+        </Button>
       </main>
     </div>
   );
