@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addToCart, removeFromCart } from "../../actions/cartActions";
 import {
   OrderWrapper,
   OrderInfo,
@@ -27,17 +26,25 @@ import {
   CartActionButton,
 } from "./style";
 
+function TwoDecimal(x) {
+  return Number.parseFloat(x).toFixed(2);
+}
+
 function Checkout(props) {
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.loggedIn);
   const { cartItems } = cart;
   const { userInfo } = user;
-  const dispatch = useDispatch();
   const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
   const shippingPrice = itemsPrice > 100 ? 0 : 10;
   const taxPrice = 0.15 * itemsPrice;
   const totalPrice = itemsPrice + shippingPrice + taxPrice;
-
+  const placeOrderHandler = () => {
+    alert(
+      "Your order has been placed successfully, you will be redirecting to the PalPay to finish your payment."
+    );
+    props.history.push("/");
+  };
   return (
     <OrderWrapper>
       <OrderInfo>
@@ -87,7 +94,9 @@ function Checkout(props) {
                       Qty: {item.qty}
                     </CartListContentSelecterWrapper>
                   </CartListContentDetails>
-                  <CartListContentPrice>${item.price}</CartListContentPrice>
+                  <CartListContentPrice>
+                    ${TwoDecimal(item.price * item.qty)}
+                  </CartListContentPrice>
                 </CartListContent>
               ))
             )}
@@ -97,7 +106,7 @@ function Checkout(props) {
       <OrderAction>
         <OrderActionWrapper>
           <OrderActionContent>
-            <CartActionButton className="button primary full-width">
+            <CartActionButton onClick={placeOrderHandler}>
               Place Order
             </CartActionButton>
           </OrderActionContent>
@@ -114,11 +123,11 @@ function Checkout(props) {
           </OrderActionContent>
           <OrderActionContent>
             <div>Tax</div>
-            <div>${taxPrice}</div>
+            <div>${TwoDecimal(taxPrice)}</div>
           </OrderActionContent>
           <OrderActionContent>
             <div>Order Total</div>
-            <div>${totalPrice}</div>
+            <div>${TwoDecimal(totalPrice)}</div>
           </OrderActionContent>
         </OrderActionWrapper>
       </OrderAction>
