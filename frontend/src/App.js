@@ -16,7 +16,7 @@ import Checkout from "./pages/checkout";
 import Faq from "./pages/faq";
 import History from "./pages/history";
 import Content from "./pages/content";
-
+import Dashboard from "./pages/dashboard/Dashboard";
 export default function App() {
   return (
     <Router>
@@ -35,6 +35,7 @@ export default function App() {
           <Route path="/checkout" component={Checkout} />
           <Route path="/orderHistory" component={History} />
           <Route path="/cart/:id?" component={Cart} />
+          <Route path="/dashboard" component={Dashboard} />
           <Route path="/" exact component={Home} />
         </Switch>
       </Fragment>

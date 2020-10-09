@@ -42,11 +42,18 @@ function Header() {
         <UserNav>
           {userInfo ? (
             <Fragment>
-              <NavUserItem href="/profile">{userInfo.username}</NavUserItem>
               {isAdmin ? (
-                <NavUserItem href="/content">Manage Content</NavUserItem>
+                <Fragment>
+                  <NavUserItem href="/dashboard">
+                    {userInfo.username}
+                  </NavUserItem>
+                  <NavUserItem href="/content">Manage Content</NavUserItem>
+                </Fragment>
               ) : (
-                <NavUserItem href="/cart">Cart</NavUserItem>
+                <Fragment>
+                  <NavUserItem href="/profile">{userInfo.username}</NavUserItem>
+                  <NavUserItem href="/cart">Cart</NavUserItem>
+                </Fragment>
               )}
             </Fragment>
           ) : (

@@ -39,12 +39,14 @@ function Checkout(props) {
   const shippingPrice = itemsPrice > 100 ? 0 : 10;
   const taxPrice = 0.15 * itemsPrice;
   const totalPrice = itemsPrice + shippingPrice + taxPrice;
+
   const placeOrderHandler = () => {
     alert(
       "Your order has been placed successfully, you will be redirecting to the PalPay to finish your payment."
     );
     props.history.push("/");
   };
+
   return (
     <OrderWrapper>
       <OrderInfo>
